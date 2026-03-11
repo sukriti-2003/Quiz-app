@@ -1,0 +1,13 @@
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar_url', 'total_score', 'is_staff')
+        read_only_fields = ('id', 'total_score', 'username', 'is_staff')
+
+class GoogleLoginSerializer(serializers.Serializer):
+    credential = serializers.CharField(required=True)
